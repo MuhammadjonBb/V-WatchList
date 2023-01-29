@@ -4,14 +4,14 @@
 
 		<ul class="aside__list">
 			<li class="aside__item">
-				<button class="aside__btn aside__list-btn btn">
+				<router-link class="aside__btn aside__list-btn" to="/">
 					<img src="../assets/home-icon.svg" alt="" srcset="" />
 					Home
-				</button>
-				<button class="aside__btn aside__list-btn btn">
+				</router-link>
+				<a class="aside__btn aside__list-btn">
 					<img src="../assets/home-icon.svg" alt="" srcset="" />
 					Watchlist
-				</button>
+				</a>
 			</li>
 		</ul>
 	</aside>
@@ -39,9 +39,10 @@
 	&__list-btn {
 		display: flex;
 		padding: 10px;
-		width: 100%;
+		max-width: 100%;
 		gap: 15px;
 		color: #e1e1e1;
+		text-decoration: none;
 		border-radius: 3px;
 		transition: all 0.3s ease;
 		background-color: #4a4a4a;

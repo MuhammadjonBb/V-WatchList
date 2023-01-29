@@ -1,5 +1,5 @@
 <template>
-	<div class="movie__card card">
+	<div class="movie__card card" @click="onCardClick()">
 		<div class="card__header" :style="`background-image: url(${poster})`"></div>
 
 		<div class="card__content">
@@ -24,13 +24,24 @@
 </template>
 
 <script setup>
-defineProps({
+import { useRouter } from 'vue-router';
+import { toRefs } from 'vue';
+const router = useRouter();
+
+const props = defineProps({
 	poster: String,
 	title: String,
 	rating: String,
 	time: String,
 	year: String,
+	id: Number,
 });
+
+const { id } = toRefs(props);
+
+function onCardClick() {
+	router.push({ path: `/movie/${id.value}` });
+}
 </script>
 
 <style lang="scss">
