@@ -22,9 +22,9 @@
 	display: flex;
 	padding: 30px;
 	flex-direction: column;
-	width: 320px;
+	min-width: 20%;
 	background-color: #000;
-	min-height: 100%;
+	min-height: 100vh;
 
 	&__logo {
 		margin-bottom: 20px;

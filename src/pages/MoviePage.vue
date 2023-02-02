@@ -1,5 +1,5 @@
 <template>
-    <div class="movie" v-if="movie">
+    <div class="movie container" v-if="movie">
         <div class="movie__poster-wrap">
             <img :src="movie.posterUrl" alt="" class="movie__poster" />
         </div>
@@ -24,6 +24,8 @@
                 </div>
             </div>
 
+            <span class="movie__age" v-if="movie.ratingAgeLimits">+{{ (movie.ratingAgeLimits).slice(3) }}</span>
+
             <div class="movie__overview">
                 <h2 class="movie__title movie__title--about">Описание</h2>
 
@@ -31,7 +33,11 @@
             </div>
 
             <div class="movie__score">
-                <span class="movie__score-count">{{ movie.ratingKinopoisk }}</span>
+                <h3 class="movie__title movie__title--rate">Рейт</h3>
+                <span class="movie__score-count" v-if="movie.ratingKinopoisk">{{ movie.ratingKinopoisk }}</span>
+                <span class="movie__score-count" v-else-if="movie.ratingImdb">{{ movie.ratingImdb }}</span>
+                <span class="movie__score-count" v-else>{{ movie.ratingFilmCritics }}</span>
+
             </div>
         </div>
     </div>
@@ -39,37 +45,26 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { API_URL, API_KEY } from "@/apiInfo";
+import { API_URL, config } from "@/apiInfo";
 import { onMounted, ref } from 'vue';
+import axios from 'axios';
 
 const route = useRoute();
 const movie = ref();
 
 async function getFilmDetails() {
-    const res = await fetch(
-        `${API_URL}/api/v2.2/films/${route.params.id}`,
-        {
-            method: "GET",
-            headers: {
-                "X-API-KEY": API_KEY,
-                "Content-Type": "application/json",
-            },
-        }
-    );
-
-    return await res.json();
+    return axios.get(`${API_URL}/api/v2.2/films/${route.params.id}`, config)
+        .then(res => res.data)
 }
 
 onMounted(() => {
     getFilmDetails().then(data => movie.value = data);
-    console.log(movie.value);
 })
 </script>
 
 <style lang="scss">
 .movie {
     display: flex;
-    padding: 60px;
     gap: 45px;
 
     &__poster {
@@ -91,13 +86,21 @@ onMounted(() => {
         color: #E1E1E1;
     }
 
+    &__title--rate {
+        font-size: 25px;
+        margin: 0;
+        text-align: center;
+        line-height: 150%;
+    }
+
     &__genre-country {
         display: flex;
-        margin-bottom: 50px;
+        margin-bottom: 15px;
     }
 
     &__genre-country-list {
         display: flex;
+        flex-wrap: wrap;
     }
 
     &__genre-country-info {
@@ -132,6 +135,12 @@ onMounted(() => {
     &__genre:not(:last-child)::after,
     &__country:not(:last-child)::after {
         content: ', ';
+    }
+
+    &__age {
+        margin-bottom: 20px;
+        color: #D9D9D9;
+        font-size: 20px;
     }
 
     &__title--about {
