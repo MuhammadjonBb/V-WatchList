@@ -27,7 +27,7 @@ const movies = ref(JSON.parse(localStorage.getItem('watchlist')));
 const router = useRouter();
 
 function onItemClick(id) {
-    router.push({ path: `/movie/${id}` });
+    router.push({ path: `/V-WatchList/movie/${id}` });
 }
 
 function onRemoveBtn(id) {

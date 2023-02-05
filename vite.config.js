@@ -4,8 +4,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  transpileDependencies: true,
-  publicPath: '/V-WatchList/',
+  base: '/V-WatchList/',
   plugins: [vue()],
   resolve: {
     alias: {

@@ -5,17 +5,17 @@ import WatchlistPage from "@/pages/WatchlistPage.vue";
 
 const routes = [
 	{
-		path: "/",
+		path: "/V-WatchList/",
 		name: "Home",
 		component: HomePage,
 	},
 	{
-		path: "/movie/:id",
+		path: "/V-WatchList/movie/:id",
 		name: "Movie ",
 		component: MoviePage,
 	},
 	{
-		path: "/watchlist",
+		path: "V-WatchList/watchlist",
 		name: "Watchlist",
 		component: WatchlistPage,
 	}
