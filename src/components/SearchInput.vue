@@ -1,11 +1,23 @@
 <template>
-	<form class="search search__form">
-		<input type="text" placeholder="Найти фильм по названию" class="search__input input" />
-		<button class="btn-primary search__btn btn">Найти</button>
+	<form class="search search__form" @submit.prevent="onSubmit()">
+		<input type="text" v-model="value" placeholder="Найти фильм по названию" class="search__input input" />
+		<button class="btn-primary search__btn btn" :disabled="!value.trim()">Найти</button>
 	</form>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+const router = useRouter();
+
+const value = ref('');
+
+function onSubmit() {
+	router.push({ query: { search: value.value } });
+	value.value = '';
+}
+
+</script>
 
 <style lang="scss">
 .search {
@@ -25,6 +37,10 @@
 	&__btn {
 		padding: 13px 22px;
 		border-radius: 6px;
+	}
+
+	&__btn:disabled {
+		opacity: 0.5;
 	}
 }
 </style>

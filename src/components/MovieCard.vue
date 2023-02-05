@@ -49,7 +49,6 @@ function onCardClick() {
 	background: #ffffff;
 	box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
 	width: 100%;
-	max-width: 315px;
 	border-radius: 10px;
 	display: inline-block;
 	transition: transform 0.3s ease;
@@ -58,7 +57,7 @@ function onCardClick() {
 	&__header {
 		padding: 0;
 		margin: 0;
-		height: 367px;
+		height: 450px;
 		width: 100%;
 		display: block;
 		background-size: cover;
@@ -68,7 +67,6 @@ function onCardClick() {
 
 	&__content {
 		padding: 18px 18px 24px 18px;
-		margin: 0;
 	}
 
 	&__content-head,

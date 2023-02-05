@@ -52,8 +52,9 @@ import axios from 'axios';
 const route = useRoute();
 const movie = ref();
 
-async function getFilmDetails() {
-    return axios.get(`${API_URL}/api/v2.2/films/${route.params.id}`, config)
+function getFilmDetails() {
+    return axios
+        .get(`${API_URL}/api/v2.2/films/${route.params.id}`, config)
         .then(res => res.data)
 }
 
