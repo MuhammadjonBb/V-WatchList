@@ -1,7 +1,8 @@
 <template>
 	<aside class="aside">
-		<img src="../assets/ logo.svg" alt="Logo" class="aside__logo" />
-
+		<div class="logo-wrap"> <span class="prefix">V</span> -
+			<img src="../assets/ logo.svg" alt="Logo" class="aside__logo" />
+		</div>
 		<ul class="aside__list">
 			<li class="aside__item">
 				<router-link class="aside__btn aside__list-btn" to="/">
@@ -55,5 +56,15 @@
 	&__list-btn:not(:last-child) {
 		margin-bottom: 20px;
 	}
+}
+
+.logo-wrap {
+	display: flex;
+	font-size: 48px;
+	color: #35495e;
+}
+
+.prefix {
+	color: #42b883;
 }
 </style>

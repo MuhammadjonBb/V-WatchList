@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="w-list__wrap">
+        <div class="w-list__wrap" v-if="movies.length">
             <ul class="w-list__list list">
                 <li class="list__item item" v-for="movie in movies" :key="movie.id">
                     <img :src="movie.poster" :alt="movie.title" class="item__poster" @click="onItemClick(movie.id)">
@@ -10,6 +10,11 @@
                     <button class="item__remove-btn btn btn-secondary" @click="onRemoveBtn(movie.id)">Удалить</button>
                 </li>
             </ul>
+        </div>
+        <div class="empty" v-else>
+            <h1 class="empty__title">
+                Здесь пока пусто...
+            </h1>
         </div>
     </div>
 </template>
@@ -76,5 +81,13 @@ function onRemoveBtn(id) {
         margin-left: auto;
     }
 
+}
+
+.empty {
+    &__title {
+        color: #fff;
+        font-size: 24px;
+        line-height: 150%;
+    }
 }
 </style>

@@ -157,6 +157,9 @@ table {
   justify-content: center;
   color: #141414;
   background: #f33f3f;
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  transition: all 0.3s ease;
 }
 
 .container {
@@ -172,4 +175,23 @@ table {
   border: 1px solid #f33f3f;
   border-radius: 4px;
   padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:disabled {
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  outline-color: #f33f3f;
+  color: #e1e1e1;
+}
+
+.btn-primary:active {
+  background: #f33f3f;
+}
+
+.btn-secondary:hover {
+  background: #f33f3f;
 }

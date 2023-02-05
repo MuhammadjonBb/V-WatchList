@@ -41,7 +41,7 @@
                 </div>
 
                 <button @click="addToWatchlist" class="btn-primary btn movie__add-list-btn">Добавить в
-                    вотчлист*</button>
+                    Watchlist*</button>
             </div>
         </div>
     </div>

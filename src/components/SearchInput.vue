@@ -22,9 +22,13 @@ function onSubmit() {
 <style lang="scss">
 .search {
 	display: flex;
+	background-image: url("../assets/search.svg");
+	background-size: 21px 21px;
+	background-repeat: no-repeat;
+	background-position: 12px center;
 
 	&__input {
-		padding: 13px 50px;
+		padding: 13px 40px;
 		border: 1px solid rgba(217, 217, 217, 0.3);
 		border-radius: 6px;
 		color: #fff;
