@@ -5,13 +5,13 @@
 		<ul class="aside__list">
 			<li class="aside__item">
 				<router-link class="aside__btn aside__list-btn" to="/">
-					<img src="../assets/home-icon.svg" alt="" srcset="" />
+					<img src="../assets/home-icon.svg" alt="Дом" />
 					Home
 				</router-link>
-				<a class="aside__btn aside__list-btn">
-					<img src="../assets/home-icon.svg" alt="" srcset="" />
+				<router-link class="aside__btn aside__list-btn btn" to="/watchlist">
+					<img src="../assets/list.svg" alt="Список" />
 					Watchlist
-				</a>
+				</router-link>
 			</li>
 		</ul>
 	</aside>
@@ -44,10 +44,12 @@
 		color: #e1e1e1;
 		text-decoration: none;
 		border-radius: 3px;
-		transition: all 0.3s ease;
-		background-color: #4a4a4a;
-		justify-content: center;
+		transition: background-color 0.3s ease;
 		align-items: center;
+	}
+
+	&__list-btn:hover {
+		background-color: #4a4a4a;
 	}
 
 	&__list-btn:not(:last-child) {

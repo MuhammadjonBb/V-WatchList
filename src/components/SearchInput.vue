@@ -37,6 +37,7 @@ function onSubmit() {
 	&__btn {
 		padding: 13px 22px;
 		border-radius: 6px;
+		transition: opacity .3s ease-in-out;
 	}
 
 	&__btn:disabled {

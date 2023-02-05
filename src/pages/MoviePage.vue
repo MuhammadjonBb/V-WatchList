@@ -32,12 +32,16 @@
                 <p class="movie__descr">{{ movie.description }}</p>
             </div>
 
-            <div class="movie__score">
-                <h3 class="movie__title movie__title--rate">Рейт</h3>
-                <span class="movie__score-count" v-if="movie.ratingKinopoisk">{{ movie.ratingKinopoisk }}</span>
-                <span class="movie__score-count" v-else-if="movie.ratingImdb">{{ movie.ratingImdb }}</span>
-                <span class="movie__score-count" v-else>{{ movie.ratingFilmCritics }}</span>
+            <div class="movie__footer">
+                <div class="movie__score">
+                    <h3 class="movie__title movie__title--rate">Рейт</h3>
+                    <span class="movie__score-count" v-if="movie.ratingKinopoisk">{{ movie.ratingKinopoisk }}</span>
+                    <span class="movie__score-count" v-else-if="movie.ratingImdb">{{ movie.ratingImdb }}</span>
+                    <span class="movie__score-count" v-else>{{ movie.ratingFilmCritics }}</span>
+                </div>
 
+                <button @click="addToWatchlist" class="btn-primary btn movie__add-list-btn">Добавить в
+                    вотчлист*</button>
             </div>
         </div>
     </div>
@@ -55,7 +59,22 @@ const movie = ref();
 function getFilmDetails() {
     return axios
         .get(`${API_URL}/api/v2.2/films/${route.params.id}`, config)
-        .then(res => res.data)
+        .then(res => res.data);
+}
+
+function addToWatchlist() {
+    const _movie = {
+        title: movie.value.nameRu,
+        year: movie.value.year,
+        poster: movie.value.posterUrl,
+        id: movie.value.kinopoiskId
+    }
+    const list = JSON.parse(localStorage.getItem('watchlist'));
+
+    if (list.find(m => m.id === _movie.id)) return;
+
+    list.push(_movie);
+    localStorage.setItem('watchlist', JSON.stringify(list));
 }
 
 onMounted(() => {
@@ -179,5 +198,19 @@ onMounted(() => {
         color: #F33F3F;
     }
 
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    &__add-list-btn {
+        padding: 22px 31px;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+    }
 }
 </style>

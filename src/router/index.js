@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import HomePage from "@/pages/HomePage.vue";
 import MoviePage from "@/pages/MoviePage.vue";
+import WatchlistPage from "@/pages/WatchlistPage.vue";
 
 const routes = [
 	{
@@ -13,6 +14,11 @@ const routes = [
 		name: "Movie ",
 		component: MoviePage,
 	},
+	{
+		path: "/watchlist",
+		name: "Watchlist",
+		component: WatchlistPage,
+	}
 ];
 
 const router = createRouter({
