@@ -1,7 +1,7 @@
 <template>
 	<aside class="aside">
 		<div class="logo-wrap"> <span class="prefix">V</span> -
-			<img src="../assets/ logo.svg" alt="Logo" class="aside__logo" />
+			<img src="../assets/logo.svg" alt="Logo" class="aside__logo" />
 		</div>
 		<ul class="aside__list">
 			<li class="aside__item">
