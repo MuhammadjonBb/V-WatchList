@@ -7,7 +7,6 @@
 
 <script setup>
 import AppAside from "@/components/AppAside.vue";
-import HomePage from "@/pages/HomePage.vue";
 
 if (!localStorage.getItem('watchlist')) {
 	localStorage.setItem('watchlist', JSON.stringify([]));

@@ -40,7 +40,7 @@ const props = defineProps({
 const { id } = toRefs(props);
 
 function onCardClick() {
-	router.push({ path: `/V-WatchList/movie/${id.value}` });
+	router.push({ path: `/movie/${id.value}` });
 }
 </script>
 

@@ -1,28 +1,28 @@
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHashHistory, createRouter } from "vue-router";
 import HomePage from "@/pages/HomePage.vue";
 import MoviePage from "@/pages/MoviePage.vue";
 import WatchlistPage from "@/pages/WatchlistPage.vue";
 
 const routes = [
 	{
-		path: "/V-WatchList/",
+		path: "/",
 		name: "Home",
 		component: HomePage,
 	},
 	{
-		path: "/V-WatchList/movie/:id",
+		path: "/movie/:id",
 		name: "Movie ",
 		component: MoviePage,
 	},
 	{
-		path: "V-WatchList/watchlist",
+		path: "/watchlist",
 		name: "Watchlist",
 		component: WatchlistPage,
 	}
 ];
 
 const router = createRouter({
-	history: createWebHistory(),
+	history: createWebHashHistory(),
 	routes,
 });
 
