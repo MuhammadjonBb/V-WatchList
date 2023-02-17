@@ -1,6 +1,6 @@
 <template>
 	<aside class="aside">
-		<div class="logo-wrap"> <span class="prefix">V</span> -
+		<div class="logo-wrap">
 			<img src="../assets/logo.svg" alt="Logo" class="aside__logo" />
 		</div>
 		<ul class="aside__list">
@@ -62,9 +62,5 @@
 	display: flex;
 	font-size: 48px;
 	color: #35495e;
-}
-
-.prefix {
-	color: #42b883;
 }
 </style>

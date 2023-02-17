@@ -1,23 +1,12 @@
 <template>
 	<div class="movie__card card" @click="onCardClick()">
-		<div class="card__header" :style="`background-image: url(${poster})`"></div>
+		<img class="card__poster" :src="poster" />
 
 		<div class="card__content">
-			<div class="card__content-head">
-				<h3 class="card__title">{{ title }}</h3>
-				<div class="card__ratings">
-					<span>{{ rating }}</span>/10
-				</div>
-			</div>
+			<h3 class="card__title">{{ title }}</h3>
+
 			<div class="card__info">
-				<div class="card__info-descr">
-					<label>Год</label>
-					<span>Длительность</span>
-				</div>
-				<div class="card__info-descr">
-					<label>{{ year }}</label>
-					<span>{{ time }}</span>
-				</div>
+				<span class="card__year">{{ year }}</span> / <span class="card__genre">{{ genre }}</span>
 			</div>
 		</div>
 	</div>
@@ -31,10 +20,9 @@ const router = useRouter();
 const props = defineProps({
 	poster: String,
 	title: String,
-	rating: String,
-	time: String,
 	year: String,
 	id: Number,
+	genre: String,
 });
 
 const { id } = toRefs(props);
@@ -46,89 +34,54 @@ function onCardClick() {
 
 <style lang="scss">
 .card {
-	background: #ffffff;
-	box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
 	width: 100%;
 	border-radius: 10px;
 	display: inline-block;
 	transition: transform 0.3s ease;
 	cursor: pointer;
 
-	&__header {
+	&__poster {
+		position: relative;
 		padding: 0;
 		margin: 0;
-		height: 450px;
+		height: 300px;
 		width: 100%;
 		display: block;
-		background-size: cover;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
 	}
 
-	&__content {
-		padding: 18px 18px 24px 18px;
+	&__poster::after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		background-color: rgba(0, 0, 0, 0.7);
+		opacity: 0;
+		z-index: 5;
+		transition: opacity .3s ease-in-out;
 	}
 
-	&__content-head,
-	&__info {
-		display: table;
-		width: 100%;
+	&__content {
+		padding-top: 5px;
 	}
 
 	&__title {
-		font-family: "Roboto";
-		font-size: 22px;
-		margin: 0;
-		display: table-cell;
-		display: -webkit-box;
-		-webkit-line-clamp: 1; // количество строк
+		margin-bottom: 3px;
+		color: #fff;
+		font-size: 16px;
+		line-height: 130%;
+		-webkit-line-clamp: 2; // количество строк
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}
 
-	&__ratings {
-		width: 50px;
-		height: 15px;
-		background-size: contain;
-		display: table-cell;
-		text-align: right;
-		position: relative;
-		margin-top: 5px;
-		font-weight: 600;
-	}
-
-	&__ratings span {
-		color: #2196f3;
-	}
-
 	&__info {
-		margin-top: 1em;
-	}
-
-	&__info-descr {
-		display: table-cell;
-		text-transform: uppercase;
-		text-align: center;
-	}
-
-	&__info-descr:first-of-type {
-		text-align: left;
-	}
-
-	&__info-descr:last-of-type {
-		text-align: right;
-	}
-
-	&__info-descr label {
-		display: block;
-		color: rgba(0, 0, 0, 0.5);
-		margin-bottom: 0.5em;
-		font-size: 9px;
-	}
-
-	&__info-descr span {
-		font-weight: 700;
-		font-size: 11px;
+		text-transform: capitalize;
+		color: #777;
+		font-size: 12px;
 	}
 }
 
@@ -136,5 +89,9 @@ function onCardClick() {
 	-webkit-transform: scale(1.03);
 	transform: scale(1.03);
 	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover .card__poster::after {
+	opacity: 1;
 }
 </style>

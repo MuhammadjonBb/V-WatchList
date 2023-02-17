@@ -1,8 +1,8 @@
 <template>
 	<ul class="movie__list" v-if="films">
 		<li class="movie__item" v-for="film in films.films" :key="film.filmId">
-			<MovieCard :poster="film.posterUrl" :title="film.nameRu" :rating="film.rating" :time="film.filmLength"
-				:year="film.year" :id="film.filmId" />
+			<MovieCard :poster="film.posterUrl" :title="film.nameRu" :year="film.year" :id="film.filmId"
+				:genre="film.genres[0].genre" />
 		</li>
 	</ul>
 </template>
@@ -55,8 +55,8 @@ watch(query, loadSearchedFilms), { deep: true, immediate: true };
 .movie__list {
 	padding-top: 30px;
 	display: grid;
-	grid-template-columns: 310px 310px 310px;
-	grid-auto-rows: 600px;
+	grid-template-columns: 198px 198px 198px 198px 198px;
+	grid-auto-rows: 370px;
 	row-gap: 30px;
 	column-gap: 30px;
 }
