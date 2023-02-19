@@ -1,8 +1,8 @@
 <template>
-	<ul class="movie__list" v-if="films">
+	<ul class="movie__list" v-if="films" ref="scrollComponent">
 		<li class="movie__item" v-for="film in films.films" :key="film.filmId">
 			<MovieCard :poster="film.posterUrl" :title="film.nameRu" :year="film.year" :id="film.filmId"
-				:genre="film.genres[0].genre" />
+				:genre="film.genres[0]?.genre" />
 		</li>
 	</ul>
 </template>
@@ -10,31 +10,49 @@
 <script setup>
 import MovieCard from "@/components/MovieCard.vue";
 import { API_URL, config } from "@/apiInfo";
-import { onMounted, ref, watch, computed } from "vue";
+import { onMounted, ref, watch, computed, onUnmounted } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const films = ref();
-const query = useQuery()
+const query = useQuery();
+const films = ref(null);
+const pageNum = ref(1);
+const scrollComponent = ref(null);
 
 onMounted(() => {
-	loadFilms().then((data) => {
-		films.value = data;
-	});
+	loadFilms(pageNum.value).then(data => films.value = data);
+	window.addEventListener("scroll", handleScroll);
 });
 
-function loadFilms() {
+onUnmounted(() => {
+	window.removeEventListener("scroll", handleScroll);
+});
+
+function loadFilms(num) {
 	return axios
-		.get(`${API_URL}/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1`, config)
+		.get(`${API_URL}/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=${num}`, config)
 		.then(res => res.data);
+}
+
+function loadMoreFilms() {
+	if (films.value.pagesCount === pageNum.value) return;
+	pageNum.value += 1;
+	loadFilms(pageNum.value).then(data => {
+		films.value.films.push(...data.films);
+	});
+}
+
+function handleScroll() {
+	const elm = scrollComponent.value;
+	if (elm?.getBoundingClientRect().bottom < window.innerHeight) {
+		loadMoreFilms();
+	}
 }
 
 function loadSearchedFilms() {
 	if (!route.query.search) {
-		loadFilms().then((data) => {
-			films.value = data;
-		});
+		loadFilms().then(data => films.value = data);
 	} else {
 		return axios
 			.get(`${API_URL}/api/v2.1/films/search-by-keyword?keyword=${query.value.search} `, config)
