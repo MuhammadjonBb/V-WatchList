@@ -73,7 +73,6 @@ function loadSearchedFilms() {
 	if (!route.query.search) {
 		loadTopFilms(pageNum.value).then(data => films.value = data);
 	} else {
-		console.log(route.query.search);
 		if (!isSearchData.value) pageNum.value = 1;
 		return axios
 			.get(`${API_URL}/api/v2.1/films/search-by-keyword?keyword=${query.value.search}&page=${pageNum.value}`, config)
@@ -89,7 +88,9 @@ function handleStoreFilms() {
 		films.value = store.filteredFilms.data;
 		pageNum.value = 1;
 		isFilterData.value = true;
-	}
+	} else
+		loadTopFilms(pageNum.value).then(data => films.value = data);
+
 }
 
 function setTopFilms() {

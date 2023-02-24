@@ -16,7 +16,7 @@
 
         <div class="filter__btn-group">
             <button class="button filter__btn filter__btn--submit btn-primary btn" @click="getFilteredFilms">Найти</button>
-            <button class="button filter__btn filter__btn--clean  btn">Сбросить</button>
+            <button class="button filter__btn filter__btn--clean  btn" @click="clearFilteredFilms">Сбросить</button>
         </div>
     </div>
 </template>
@@ -26,7 +26,6 @@ import { ref } from "vue";
 import axios from "axios";
 import { API_URL } from "@/apiInfo";
 import { useFilmsStore } from "@/store";
-
 
 const store = useFilmsStore();
 const currentYear = new Date().getFullYear();
@@ -61,6 +60,10 @@ function getFilteredFilms() {
             store.$patch({ filteredFilms: data });
         })
         .finally(() => $movieList.classList.remove('loading'));
+}
+
+function clearFilteredFilms() {
+    store.clearFilteredFilms();
 }
 </script>
 
