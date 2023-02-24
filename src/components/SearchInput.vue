@@ -28,6 +28,7 @@ function onSubmit() {
 	background-position: 12px center;
 
 	&__input {
+		width: 100%;
 		padding: 13px 40px;
 		border: 1px solid rgba(217, 217, 217, 0.3);
 		border-radius: 6px;

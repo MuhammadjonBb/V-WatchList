@@ -7,7 +7,7 @@
 			<li class="aside__item">
 				<router-link class="aside__btn aside__list-btn" to="/">
 					<img src="../assets/home-icon.svg" alt="Дом" />
-					Home
+					Каталог
 				</router-link>
 				<router-link class="aside__btn aside__list-btn btn" to="/watchlist">
 					<img src="../assets/list.svg" alt="Список" />
@@ -15,15 +15,21 @@
 				</router-link>
 			</li>
 		</ul>
+
+		<aside-filter></aside-filter>
 	</aside>
 </template>
+
+<script setup>
+import AsideFilter from '@/components/AsideFilter.vue';
+</script>
 
 <style lang="scss">
 .aside {
 	display: flex;
 	padding: 30px;
 	flex-direction: column;
-	min-width: 20%;
+	min-width: 19%;
 	background-color: #000;
 	min-height: 100vh;
 

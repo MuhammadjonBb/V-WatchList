@@ -20,7 +20,7 @@ const router = useRouter();
 const props = defineProps({
 	poster: String,
 	title: String,
-	year: String,
+	year: String | Number,
 	id: Number,
 	genre: String,
 });

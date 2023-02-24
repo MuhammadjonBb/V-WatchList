@@ -191,7 +191,6 @@ table {
 }
 
 .input {
-  width: 100%;
   border: none;
   background: none;
   padding: 0;
@@ -213,6 +212,10 @@ table {
 .container {
   max-width: 1130px;
   padding: 30px 30px;
+}
+
+.container.film-page-container {
+  min-width: 100%;
 }
 
 .btn-secondary {
@@ -240,6 +243,23 @@ table {
   background: #f33f3f;
 }
 
+.btn-primary:focus {
+  background: transparent;
+  outline-color: #f33f3f;
+  color: #e1e1e1;
+}
+
 .btn-secondary:hover {
   background: #f33f3f;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.loading {
+  transition: all 0.3s ease-in-out;
+  filter: blur(5px);
 }
