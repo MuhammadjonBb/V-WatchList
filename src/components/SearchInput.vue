@@ -26,6 +26,7 @@ function onSubmit() {
 	background-size: 21px 21px;
 	background-repeat: no-repeat;
 	background-position: 12px center;
+	gap: 10px;
 
 	&__input {
 		width: 100%;

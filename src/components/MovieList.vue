@@ -57,13 +57,40 @@ function loadMoreSearhedFilms() {
 	})
 }
 
+function loadMoreFilteredFilms() {
+	if (films.value.pagesCount === pageNum.value) return;
+	const API_KEY = "f361a58c-c004-4ebe-bc96-e37201232799";
+	const url = store.filteredFilms.config.url;
+	const urlParams = store.filteredFilms.config.params;
+
+	setFilteredFilms();
+	pageNum.value += 1;
+
+	return axios
+		.get(url, {
+			params: {
+				ratingFrom: urlParams.ratingFrom,
+				ratingTo: urlParams.ratingTo,
+				yearFrom: urlParams.yearFrom,
+				yearTo: urlParams.yearTo,
+				page: pageNum.value,
+			}, headers: {
+				"X-API-KEY": API_KEY,
+				"Content-Type": "application/json",
+			}
+		})
+		.then(res => {
+			store.filteredFilms.data.items.push(...res.data.items);
+		});
+}
+
 function handleScroll() {
 	const elm = scrollComponent.value;
 	if (elm?.getBoundingClientRect().bottom < window.innerHeight) {
 		if (isSearchData.value) {
 			loadMoreSearhedFilms();
 		} else if (isFilterData.value) {
-			// loadMoreFilteredFilms();
+			loadMoreFilteredFilms();
 		} else
 			loadMoreTopFilms();
 	}
@@ -77,7 +104,7 @@ function loadSearchedFilms() {
 		return axios
 			.get(`${API_URL}/api/v2.1/films/search-by-keyword?keyword=${query.value.search}&page=${pageNum.value}`, config)
 			.then(res => {
-				isSearchData.value = true;
+				setSearchedFilms();
 				return res;
 			});
 	}
@@ -86,11 +113,10 @@ function loadSearchedFilms() {
 function handleStoreFilms() {
 	if (store.filteredFilms) {
 		films.value = store.filteredFilms.data;
-		pageNum.value = 1;
-		isFilterData.value = true;
+		if (!isFilterData.value) pageNum.value = 1;
+		setFilteredFilms();
 	} else
 		loadTopFilms(pageNum.value).then(data => films.value = data);
-
 }
 
 function setTopFilms() {
@@ -98,8 +124,18 @@ function setTopFilms() {
 	isSearchData.value = false;
 }
 
+function setFilteredFilms() {
+	isSearchData.value = false;
+	isFilterData.value = true;
+}
+
+function setSearchedFilms() {
+	isFilterData.value = false;
+	isSearchData.value = true;
+}
+
 function useQuery() {
-	return computed(() => route.query)
+	return computed(() => route.query);
 }
 
 watch(store, handleStoreFilms);
