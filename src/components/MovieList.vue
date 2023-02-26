@@ -98,7 +98,7 @@ function handleScroll() {
 
 function loadSearchedFilms() {
 	if (!route.query.search) {
-		loadTopFilms(pageNum.value).then(data => films.value = data);
+		return loadTopFilms(pageNum.value).then(data => films.value = data);
 	} else {
 		if (!isSearchData.value) pageNum.value = 1;
 		return axios

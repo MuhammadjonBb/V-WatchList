@@ -1,7 +1,7 @@
 <template>
     <div class="movie container film-page-container" v-if="movie" :style="`background-image:
-            linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
-        url('${movie.posterUrl}');`">
+                                                                    linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                                    url('${movie.posterUrl}');`">
         <div class="movie__poster-wrap">
             <img :src="movie.posterUrl" :alt="movie.nameRu" class="movie__poster" />
         </div>
@@ -65,7 +65,9 @@ import { useRoute } from 'vue-router';
 import { API_URL, config } from "@/apiInfo";
 import { onMounted, ref } from 'vue';
 import axios from 'axios';
+import { useNotification } from "@kyvg/vue3-notification";
 
+const { notify } = useNotification();
 const route = useRoute();
 const movie = ref();
 
@@ -88,6 +90,10 @@ function addToWatchlist() {
 
     list.push(_movie);
     localStorage.setItem('watchlist', JSON.stringify(list));
+
+    notify({
+        title: "Фильм добавлен в WatchList",
+    });
 }
 
 onMounted(() => {

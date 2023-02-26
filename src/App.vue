@@ -2,6 +2,7 @@
 	<div style="display: flex;">
 		<AppAside></AppAside>
 		<router-view />
+		<notifications />
 	</div>
 </template>
 
@@ -13,6 +14,4 @@ if (!localStorage.getItem('watchlist')) {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

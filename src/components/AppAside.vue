@@ -16,12 +16,18 @@
 			</li>
 		</ul>
 
-		<aside-filter></aside-filter>
+		<Transition name="slide-fade">
+			<aside-filter v-show="route.fullPath === '/'"></aside-filter>
+		</Transition>
 	</aside>
 </template>
 
 <script setup>
 import AsideFilter from '@/components/AsideFilter.vue';
+
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 </script>
 
 <style lang="scss">
