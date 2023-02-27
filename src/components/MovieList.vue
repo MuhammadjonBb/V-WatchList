@@ -98,7 +98,7 @@ function handleScroll() {
 
 function loadSearchedFilms() {
 	if (!route.query.search) {
-		return loadTopFilms(pageNum.value).then(data => films.value = data);
+		return loadTopFilms(1);
 	} else {
 		if (!isSearchData.value) pageNum.value = 1;
 		return axios
@@ -139,7 +139,7 @@ function useQuery() {
 }
 
 watch(store, handleStoreFilms);
-watch(query, () => loadSearchedFilms().then(res => films.value = res.data));
+watch(query, () => loadSearchedFilms().then(res => films.value = res.data || res));
 </script>
 
 <style lang="scss">
