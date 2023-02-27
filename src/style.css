@@ -278,3 +278,8 @@ input::-webkit-inner-spin-button {
   transform: translateX(-50px);
   opacity: 0;
 }
+
+.vue-notification-group {
+  right: 30px !important;
+  bottom: 30px !important;
+}

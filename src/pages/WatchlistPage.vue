@@ -1,15 +1,15 @@
 <template>
     <div class="container">
         <div class="w-list__wrap" v-if="movies.length">
-            <ul class="w-list__list list">
+            <TransitionGroup class="w-list__list list" name="list" tag="ul">
                 <li class="list__item item" v-for="movie in movies" :key="movie.id">
                     <img :src="movie.poster" :alt="movie.title" class="item__poster" @click="onItemClick(movie.id)">
-                    <h2 class="item__title" @click="onItemClick(movie.id)">{{ movie.title }} <span
-                            class="item__year">({{ movie.year }})</span>
+                    <h2 class="item__title" @click="onItemClick(movie.id)">{{ movie.title }} <span class="item__year">({{
+                        movie.year }})</span>
                     </h2>
                     <button class="item__remove-btn btn btn-secondary" @click="onRemoveBtn(movie.id)">Удалить</button>
                 </li>
-            </ul>
+            </TransitionGroup>
         </div>
         <div class="empty" v-else>
             <h1 class="empty__title">
@@ -81,6 +81,17 @@ function onRemoveBtn(id) {
         margin-left: auto;
     }
 
+}
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.3s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
 }
 
 .empty {

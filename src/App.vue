@@ -2,7 +2,7 @@
 	<div style="display: flex;">
 		<AppAside></AppAside>
 		<router-view />
-		<notifications />
+		<notifications position="bottom right" />
 	</div>
 </template>
 

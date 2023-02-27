@@ -1,7 +1,7 @@
 <template>
     <div class="movie container film-page-container" v-if="movie" :style="`background-image:
-                                                                    linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
-                                    url('${movie.posterUrl}');`">
+                                                                                                    linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                                                    url('${movie.posterUrl}');`">
         <div class="movie__poster-wrap">
             <img :src="movie.posterUrl" :alt="movie.nameRu" class="movie__poster" />
         </div>
@@ -86,13 +86,18 @@ function addToWatchlist() {
     }
     const list = JSON.parse(localStorage.getItem('watchlist'));
 
-    if (list.find(m => m.id === _movie.id)) return;
+
+    if (list.find(m => m.id === _movie.id)) {
+        notify({ title: "Фильм уже добавлен" });
+        return;
+    };
 
     list.push(_movie);
     localStorage.setItem('watchlist', JSON.stringify(list));
 
     notify({
         title: "Фильм добавлен в WatchList",
+        type: "success"
     });
 }
 
